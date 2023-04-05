@@ -28,8 +28,16 @@
    
 */ 
 
+window.addEventListener("load", function() {
+   calcCart();
+   var cart = document.forms.cart;
+   cart.elements.modelQty.onchange = calcCart;
 
-
+   var shippingOptions = document.querySelectorAll('input[name="shipping"]');
+   for (var i = 0; i <= shippingOptions.length; i++) {
+       shippingOptions[i].onclick = calcCart;
+   }
+});
 
 
 
