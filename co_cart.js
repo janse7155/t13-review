@@ -39,6 +39,28 @@ window.addEventListener("load", function() {
    }
 });
 
+function calcCart() {
+   var cart = document.forms.cart;
+   var orderCost = cart.elements.modelCost.value * cart.elements.modelQty.value;
+   cart.elements.orderCost.value = formatUSCurrency(orderCost);
+   var shipCost = 
+       document.querySelector('input[name="shipping"]:checked').value * 
+       cart.elements.modelQty.value;
+   cart.elements.shippingCost.value = formatNumber(shipCost, 2);
+   cart.elements.subTotal.value = formatNumber(orderCost + shipCost, 2);
+   var salesTax = 0.05 * (orderCost + shipCost);
+   cart.elements.salesTax.value = formatNumber(salesTax, 2);
+   cart.elements.cartTotal.value = formatUSCurrency(
+       orderCost + shipCost + salesTax
+   );
+   cart.elements.shippingType.value = document.querySelector(
+       'input[name="shipping"]:checked'
+   ).labels[0].textContent;
+}
+
+function roundToTwo(num) {
+   return +(Math.round(num + "e+2") + "e-2");
+}
 
 
 
